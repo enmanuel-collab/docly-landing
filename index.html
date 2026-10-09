@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Docly — Book doctor appointments by text</title>
+  <meta name="description" content="Docly is an AI assistant that books your doctor appointments for you, right from your Messages." />
+  <style>
+    :root {
+      --bg: #0a0a0b;
+      --fg: #f5f5f7;
+      --muted: #8a8a93;
+      --accent: #ffffff;
+      --ring: rgba(120, 130, 255, 0.18);
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    html, body { height: 100%; }
+
+    body {
+      background: var(--bg);
+      color: var(--fg);
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Inter, Helvetica, Arial, sans-serif;
+      -webkit-font-smoothing: antialiased;
+      text-rendering: optimizeLegibility;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 100svh;
+      padding: 24px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    /* subtle glow behind the content */
+    body::before {
+      content: "";
+      position: absolute;
+      top: 38%;
+      left: 50%;
+      width: 680px;
+      height: 680px;
+      transform: translate(-50%, -50%);
+      background: radial-gradient(circle, var(--ring) 0%, rgba(10,10,11,0) 70%);
+      pointer-events: none;
+    }
+
+    main {
+      position: relative;
+      z-index: 1;
+      width: 100%;
+      max-width: 560px;
+      text-align: center;
+    }
+
+    .brand {
+      font-size: 15px;
+      font-weight: 600;
+      letter-spacing: 0.02em;
+      color: var(--fg);
+      opacity: 0.9;
+      margin-bottom: 56px;
+    }
+    .brand .dot { color: var(--muted); }
+
+    h1 {
+      font-size: clamp(32px, 6vw, 52px);
+      line-height: 1.08;
+      font-weight: 600;
+      letter-spacing: -0.02em;
+      margin-bottom: 20px;
+    }
+
+    .sub {
+      font-size: clamp(15px, 2.4vw, 18px);
+      line-height: 1.5;
+      color: var(--muted);
+      max-width: 440px;
+      margin: 0 auto 40px;
+    }
+
+    .cta {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      background: var(--accent);
+      color: #0a0a0b;
+      font-size: 16px;
+      font-weight: 600;
+      text-decoration: none;
+      padding: 15px 28px;
+      border-radius: 999px;
+      transition: transform 0.15s ease, box-shadow 0.15s ease, opacity 0.15s ease;
+      box-shadow: 0 1px 0 rgba(255,255,255,0.4) inset, 0 8px 30px rgba(0,0,0,0.4);
+    }
+    .cta:hover { transform: translateY(-1px); opacity: 0.94; }
+    .cta:active { transform: translateY(0); opacity: 0.88; }
+
+    .cta svg { width: 18px; height: 18px; }
+
+    .hint {
+      margin-top: 18px;
+      font-size: 13px;
+      color: var(--muted);
+      opacity: 0.8;
+    }
+
+    footer {
+      position: absolute;
+      bottom: 24px;
+      left: 0;
+      right: 0;
+      text-align: center;
+      font-size: 12px;
+      color: var(--muted);
+      opacity: 0.6;
+      z-index: 1;
+    }
+  </style>
+</head>
+<body>
+  <main>
+    <div class="brand">Docly<span class="dot">.</span></div>
+
+    <h1>The AI assistant that books your doctor appointments&nbsp;— by text.</h1>
+
+    <p class="sub">
+      No apps, no hold music. Text Docly and it schedules, confirms, and reminds you&nbsp;— all in iMessage.
+    </p>
+
+    <a id="cta" class="cta" href="#">
+      <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+        <path d="M12 3C6.98 3 3 6.58 3 11c0 2.35 1.17 4.45 3.04 5.9-.13 1.1-.6 2.4-1.37 3.3-.2.23-.05.6.26.57 1.9-.2 3.5-.9 4.56-1.6.78.16 1.6.23 2.45.23 5.02 0 9-3.58 9-8s-3.98-8-9-8Z" fill="#0a0a0b"/>
+      </svg>
+      Text Docly
+    </a>
+
+    <p class="hint">Opens Messages with “Hey Docly” ready to send.</p>
+  </main>
+
+  <footer>Docly · demo</footer>
+
+  <script>
+    // ---- The one thing to change: Docly's phone number --------------------
+    // Use full international format, digits only after the +.
+    const DOCLY_NUMBER = "+17868288850";
+    const PREFILL = "Hey Docly";
+    // ----------------------------------------------------------------------
+
+    // "?&body=" works across iOS and Android for a pre-filled SMS/iMessage body.
+    const href = `sms:${DOCLY_NUMBER}?&body=${encodeURIComponent(PREFILL)}`;
+    document.getElementById("cta").setAttribute("href", href);
+  </script>
+</body>
+</html>
