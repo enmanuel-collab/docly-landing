@@ -142,14 +142,17 @@
   <footer>Docly · demo</footer>
 
   <script>
-    // ---- The one thing to change: Docly's phone number --------------------
-    // Use full international format, digits only after the +.
-    const DOCLY_NUMBER = "+17868288850";
+    // ---- Docly's iMessage address ----------------------------------------
+    // The Mac running Docly is signed into iMessage under this Apple ID email.
+    const DOCLY_CONTACT = "enmanueldeleon679@gmail.com";
     const PREFILL = "Hey Docly";
     // ----------------------------------------------------------------------
 
-    // "?&body=" works across iOS and Android for a pre-filled SMS/iMessage body.
-    const href = `sms:${DOCLY_NUMBER}?&body=${encodeURIComponent(PREFILL)}`;
+    // CAVEAT: the sms: deep-link scheme is designed for phone NUMBERS. With an
+    // email recipient it opens inconsistently across devices and the pre-filled
+    // body often won't populate. For a reliable "Text Docly" button, give Docly
+    // an iMessage-capable PHONE NUMBER and point DOCLY_CONTACT at that instead.
+    const href = `sms:${DOCLY_CONTACT}?&body=${encodeURIComponent(PREFILL)}`;
     document.getElementById("cta").setAttribute("href", href);
   </script>
 </body>
